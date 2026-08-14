@@ -45,6 +45,7 @@
 ```powershell
 # 1) 把本仓库装进 web profile（git 依赖，走 pnpm）
 dsh plugin --profile web add git+https://github.com/math-lrz/dsh-theme-pack.git
+dsh plugin --profile web add dsh-theme-pack   # npm 安装（装完自动挂载，无需手动 insert）
 ```
 
 ```yaml
