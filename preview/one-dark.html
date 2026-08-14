@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>深一 — DSH 主题预览</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+  background: var(--dsw-alias-bg-base);
+  color: var(--dsw-alias-label-primary);
+  font-size: 14px; line-height: 1.7;
+}
+.app { display: flex; height: 100vh; }
+.sidebar {
+  width: 264px; flex-shrink: 0; display: flex; flex-direction: column;
+  background: var(--dsw-specific-sidebar-fill);
+  border-right: 1px solid var(--dsw-alias-border-l1);
+  padding: 16px 12px;
+}
+.logo { font-size: 17px; font-weight: 600; color: var(--dsw-alias-brand-text); padding: 4px 10px 16px; }
+.newchat {
+  border: 1px solid var(--dsw-alias-border-l2); border-radius: 12px;
+  background: var(--dsw-alias-button-elevated-fill); color: var(--dsw-alias-label-primary);
+  font: inherit; padding: 9px 12px; text-align: left; cursor: pointer; margin-bottom: 14px;
+}
+.sess { padding: 8px 10px; border-radius: 10px; color: var(--dsw-alias-label-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sess:hover { background: var(--dsw-specific-sidebar-nav-item-hover); }
+.sess.active { background: var(--dsw-specific-sidebar-nav-item-active); color: var(--dsw-alias-label-primary); box-shadow: inset 2px 0 0 var(--dsw-alias-state-business-primary); }
+.sidefoot { margin-top: auto; padding: 8px 10px; color: var(--dsw-alias-label-tertiary); border-top: 1px solid var(--dsw-alias-border-l1); }
+.main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.topbar {
+  height: 52px; flex-shrink: 0; display: flex; align-items: center; gap: 10px;
+  padding: 0 24px; border-bottom: 1px solid var(--dsw-alias-border-l1);
+  color: var(--dsw-alias-label-primary); font-weight: 500;
+}
+.model { font-size: 12px; font-weight: 400; color: var(--dsw-alias-label-caption); border: 1px solid var(--dsw-alias-border-l2); border-radius: 8px; padding: 1px 8px; }
+.chat { flex: 1; overflow: hidden; padding: 24px 24px 8px; display: flex; flex-direction: column; align-items: center; }
+.col { width: 100%; max-width: 780px; }
+.msg-user { display: flex; justify-content: flex-end; margin-bottom: 18px; }
+.bubble {
+  background: var(--dsw-specific-bubble); color: var(--dsw-alias-label-primary);
+  border-radius: 16px; padding: 10px 16px; max-width: 70%;
+}
+.msg-ai { color: var(--dsw-alias-label-primary); }
+.msg-ai p { margin-bottom: 10px; }
+.msg-ai ul { margin: 0 0 10px 22px; color: var(--dsw-alias-label-secondary); }
+code.inline {
+  background: var(--dsw-alias-markdown-inline-code); border-radius: 6px;
+  padding: 1px 6px; font-family: Consolas, "Cascadia Mono", monospace; font-size: 13px;
+  color: var(--dsw-alias-label-primary-bluish);
+}
+.ok { color: var(--dsw-alias-state-success-primary); }
+.warn { color: var(--dsw-alias-state-warn-label); }
+.err { color: var(--dsw-alias-state-error-primary); }
+.code { border: 1px solid var(--dsw-alias-border-l1); border-radius: 14px; overflow: hidden; margin: 6px 0 12px; }
+.codebanner {
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--dsw-alias-markdown-code-block-banner);
+  border-bottom: 1px solid var(--dsw-alias-border-l1);
+  padding: 6px 14px; font-size: 12px; color: var(--dsw-alias-label-caption);
+}
+.code pre {
+  background: var(--dsw-alias-markdown-code-block); padding: 14px 16px;
+  font-family: Consolas, "Cascadia Mono", monospace; font-size: 13px; line-height: 1.65;
+  color: var(--dsw-alias-label-secondary); overflow: hidden;
+}
+.kw { color: var(--syn-kw); } .str { color: var(--syn-str); } .fn { color: var(--syn-fn); }
+.num { color: var(--syn-num); } .com { color: var(--syn-com); font-style: italic; }
+.cap { font-size: 12px; color: var(--dsw-alias-label-caption); }
+.composer { flex-shrink: 0; padding: 8px 24px 20px; display: flex; justify-content: center; }
+.input {
+  width: 100%; max-width: 780px; display: flex; align-items: center; gap: 10px;
+  background: var(--dsw-specific-input-major); border: 1px solid var(--dsw-alias-border-l2);
+  border-radius: 24px; padding: 12px 12px 12px 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.ph { flex: 1; color: var(--dsw-alias-label-caption); }
+.send {
+  width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--dsw-alias-button-primary-fill); color: var(--dsw-alias-label-primary-foreground);
+  font-weight: 600;
+}
+.themetag {
+  position: fixed; right: 18px; bottom: 18px; z-index: 9;
+  background: var(--dsw-alias-tooltip-bg); color: var(--dsw-alias-label-primary);
+  border: 1px solid var(--dsw-alias-border-l2); border-radius: 10px;
+  padding: 6px 12px; font-size: 12px;
+}
+.themetag b { color: var(--dsw-alias-state-business-primary); font-weight: 600; }
+</style>
+</head>
+<body style="color-scheme: dark; --dsw-alias-bg-base: rgb(40, 44, 52); --dsw-alias-bg-layer-1: rgb(44, 49, 58); --dsw-alias-bg-layer-2: rgb(53, 59, 69); --dsw-alias-bg-layer-3: rgb(62, 68, 81); --dsw-alias-bg-module-platform: rgb(53, 59, 69); --dsw-alias-bg-multi-select: rgb(53, 59, 69); --dsw-alias-bg-overlay: rgb(62, 68, 81); --dsw-alias-bg-skeleton: rgba(171, 178, 191, 0.06); --dsw-alias-border-l1: rgba(171, 178, 191, 0.07); --dsw-alias-border-l2: rgba(171, 178, 191, 0.12000000000000001); --dsw-alias-border-l2-darkmode-thin: rgba(171, 178, 191, 0.12000000000000001); --dsw-alias-border-l3: rgba(171, 178, 191, 0.16); --dsw-alias-border-l4: rgba(171, 178, 191, 0.2); --dsw-alias-border-inverted: rgba(255, 255, 255, 0.06); --dsw-alias-border-inverted2: rgba(255, 255, 255, 0.08); --dsw-alias-brand-primary: rgb(171, 178, 191); --dsw-alias-brand-primary-invert: rgb(171, 178, 191); --dsw-alias-brand-text: rgb(171, 178, 191); --dsw-alias-brand-primary-new-colorprimary-new-color: rgb(97, 175, 239); --dsw-alias-button-primary-fill: rgb(171, 178, 191); --dsw-alias-button-primary-hover: rgb(145, 151, 163); --dsw-alias-button-primary-dimmed: rgb(53, 59, 69); --dsw-alias-button-contrast-fill: rgb(171, 178, 191); --dsw-alias-button-elevated-fill: rgb(53, 59, 69); --dsw-alias-button-floating-fill: rgb(53, 59, 69); --dsw-alias-button-floating-hover: rgb(62, 68, 81); --dsw-alias-button-ghost-active-border: rgb(92, 99, 112); --dsw-alias-button-ghost-active-fill: rgb(53, 59, 69); --dsw-alias-button-ghost-active-hover: rgb(62, 68, 81); --dsw-alias-button-info-fill: rgb(97, 175, 239); --dsw-alias-button-info-hover: rgb(125, 189, 242); --dsw-alias-interactive-bg-hover: rgba(171, 178, 191, 0.06); --dsw-alias-interactive-bg-active: rgba(171, 178, 191, 0.12); --dsw-alias-interactive-bg-hover-accent: rgba(171, 178, 191, 0.18); --dsw-alias-interactive-bg-hover-solid: rgb(53, 59, 69); --dsw-alias-interactive-bg-hover-danger: rgba(224, 108, 117, 0.12); --dsw-alias-label-primary: rgb(171, 178, 191); --dsw-alias-label-secondary: rgb(157, 165, 179); --dsw-alias-label-tertiary: rgb(130, 137, 151); --dsw-alias-label-caption: rgb(92, 99, 112); --dsw-alias-label-dimmed: rgb(62, 68, 81); --dsw-alias-label-primary-dimmed: rgb(155, 162, 174); --dsw-alias-label-primary-inverted: rgb(53, 59, 69); --dsw-alias-label-primary-foreground: rgb(40, 44, 52); --dsw-alias-label-primary-bluish: rgb(97, 175, 239); --dsw-alias-markdown-citation: rgb(62, 68, 81); --dsw-alias-markdown-code-block: rgb(33, 37, 43); --dsw-alias-markdown-code-block-banner: rgb(44, 49, 58); --dsw-alias-markdown-code-segment-selected: rgb(53, 59, 69); --dsw-alias-markdown-code-segment-unselected: rgb(33, 37, 43); --dsw-alias-markdown-inline-code: rgb(44, 49, 58); --dsw-alias-markdown-placeholder: rgb(44, 49, 58); --dsw-alias-markdown-tag: rgb(44, 49, 58); --dsw-alias-scrollbar-bg-l1: rgb(62, 68, 81); --dsw-alias-scrollbar-hover-l1: rgb(100, 107, 120); --dsw-alias-scrollbar-bg-l2: rgb(62, 68, 81); --dsw-alias-scrollbar-hover-l2: rgb(100, 107, 120); --dsw-alias-state-business-primary: rgb(97, 175, 239); --dsw-alias-state-business-tertiary: rgb(84, 146, 198); --dsw-alias-state-error-primary: rgb(224, 108, 117); --dsw-alias-state-error-secondary: rgb(229, 130, 138); --dsw-alias-state-success-primary: rgb(152, 195, 121); --dsw-alias-state-success-secondary: rgb(173, 207, 148); --dsw-alias-state-success-tertiary: rgb(60, 71, 64); --dsw-alias-state-warn-primary: rgb(229, 192, 123); --dsw-alias-state-warn-secondary: rgb(234, 205, 149); --dsw-alias-state-warn-tertiary: rgb(74, 71, 65); --dsw-alias-state-warn-label: rgb(229, 192, 123); --dsw-alias-toast-bg: rgb(62, 68, 81); --dsw-alias-tooltip-bg: rgb(62, 68, 81); --dsw-specific-bubble: rgb(49, 65, 82); --dsw-specific-bubble-highlight: rgb(56, 81, 104); --dsw-specific-input-major: rgb(53, 59, 69); --dsw-specific-login-input: rgb(33, 37, 43); --dsw-specific-selector: rgb(53, 59, 69); --dsw-specific-sidebar-fill: rgb(33, 37, 43); --dsw-specific-sidebar-nav-item-hover: rgb(44, 49, 58); --dsw-specific-sidebar-nav-item-active: rgb(53, 59, 69); --dsw-specific-sidebar-nav-item-active-accent: rgb(57, 83, 108); --dsw-specific-tip: rgb(53, 59, 69); --syn-kw: #c678dd; --syn-str: #98c379; --syn-fn: #61afef; --syn-num: #d19a66; --syn-com: #5c6370">
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo">DeepSeek</div>
+    <button class="newchat">＋ 开启新会话</button>
+    <div class="sess">期中试卷讲评提纲</div>
+    <div class="sess active">DSH 主题包设计</div>
+    <div class="sess">导数压轴题归类整理</div>
+    <div class="sess">家长会发言稿润色</div>
+    <div class="sidefoot">⚙ 设置</div>
+  </aside>
+  <div class="main">
+    <div class="topbar">DSH 主题包设计 <span class="model">k3-256k</span></div>
+    <div class="chat"><div class="col">
+      <div class="msg-user"><div class="bubble">把 16 套主题各出一张预览图，深色主题的代码块要好看。</div></div>
+      <div class="msg-ai">
+        <p>已按 <code class="inline">--dsw-alias-*</code> 语义层完成映射，规则：</p>
+        <ul>
+          <li>背景四层与侧栏取自调色板原色，层级不乱；</li>
+          <li>状态色 <span class="ok">成功</span> / <span class="warn">警告</span> / <span class="err">错误</span> 沿用主题官方色。</li>
+        </ul>
+        <div class="code">
+          <div class="codebanner"><span>javascript</span><span>复制</span></div>
+          <pre><span class="com">// 调色板 → DSH 语义 token 覆盖表</span>
+<span class="kw">const</span> themes = palettes.<span class="fn">map</span>((p) =&gt; ({
+  id: p.id,                       <span class="com">// 例：'tokyo-night'</span>
+  colorScheme: <span class="str">'dark'</span>,
+  tokens: <span class="fn">tokensFor</span>(p),             <span class="com">// --dsw-alias-* 全集</span>
+  swatches: <span class="num">4</span>,
+}));
+<span class="kw">export default</span> themes;</pre>
+        </div>
+        <p class="cap">配色数据源：src/palettes.mjs · 映射器：src/tokens.mjs</p>
+      </div>
+    </div></div>
+    <div class="composer"><div class="input"><span class="ph">给 DeepSeek 发送消息…</span><span class="send">↑</span></div></div>
+  </div>
+</div>
+<div class="themetag"><b>深一</b> · One Dark · 深色</div>
+</body>
+</html>
