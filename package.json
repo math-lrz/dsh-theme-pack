@@ -10,14 +10,8 @@
     "./package.json": "./package.json"
   },
   "dsh": {
-    "client": {
-      "platform": "web",
-      "inject": [
-        "@deepseek-ai/dsh-client-ui-theme",
-        "@deepseek-ai/dsh-client-ui-slots",
-        "@deepseek-ai/dsh-client-locale",
-        "@deepseek-ai/dsh-client-runtime"
-      ]
+    "bundle": {
+      "patch": "./cordis.patch.yml"
     }
   },
   "scripts": {
@@ -28,7 +22,19 @@
     "type": "git",
     "url": "git+https://github.com/math-lrz/dsh-theme-pack.git"
   },
-  "keywords": ["dsh", "deepseek-harness", "theme", "skin", "catppuccin", "gruvbox", "tokyo-night", "solarized", "kanagawa", "nord", "dracula"],
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "theme",
+    "skin",
+    "catppuccin",
+    "gruvbox",
+    "tokyo-night",
+    "solarized",
+    "kanagawa",
+    "nord",
+    "dracula"
+  ],
   "author": "math-lrz",
   "license": "MIT",
   "files": [
@@ -38,6 +44,7 @@
     "preview/",
     "previews/",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "cordis.patch.yml"
   ]
 }
